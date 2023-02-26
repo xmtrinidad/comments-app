@@ -1,0 +1,5 @@
+
+
+<footer>
+  <h1>Footer works</h1>
+</footer>
