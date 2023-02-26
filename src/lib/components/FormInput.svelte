@@ -2,11 +2,23 @@
   export let id: string = '';
   export let name: string = '';
   export let type: string = 'text'
+  export let value = '';
+  export let resetInput = false;
+
+  $: if (resetInput) {
+    value = '';
+    resetInput = false;
+  }
+
+  function handleInput(e: Event) {
+    const element = e.currentTarget as HTMLInputElement;
+    value = element.value;
+  }
 </script>
 
 <div class="form-input-container">
   <label for="{id}">{name}</label>
-  <input {type} {id}>
+  <input {value} on:input={handleInput} {type} {id}>
 </div>
 
 <style>
