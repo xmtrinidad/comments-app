@@ -10,6 +10,16 @@ body {
   box-sizing: inherit;
 }
 
-h1, h2 {
+:root {
+  --primary-color: #303F9F;
+  --accent-color: #7C4DFF;
+}
+
+h1, h2, p {
   margin: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
 }

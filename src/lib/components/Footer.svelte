@@ -6,7 +6,7 @@
 
 <style>
   footer {
-    background-color: #303F9F;
+    background-color: var(--primary-color);
     height: 60px;
     display: flex;
     align-items: center;

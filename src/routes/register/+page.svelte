@@ -56,12 +56,13 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-bottom: 16px;
   }
 
   button {
     display: block;
     padding: 16px;
-    background-color: #7C4DFF;
+    background-color: var(--accent-color);
     color: #fff;
     border: none;
     border-radius: 4px;
