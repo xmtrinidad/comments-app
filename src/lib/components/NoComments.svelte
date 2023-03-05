@@ -15,6 +15,7 @@
     align-items: center;
     gap: 24px;
     margin-top: 36px;
+    text-align: center;
   }
 
   button {
