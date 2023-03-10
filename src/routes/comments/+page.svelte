@@ -1,6 +1,7 @@
 <script lang="ts">
   import Comment from "$lib/components/Comment.svelte";
 import NoComments from "$lib/components/NoComments.svelte";
+    import Reply from "$lib/components/Reply.svelte";
   const topics = ['1'];
 </script>
 
@@ -10,7 +11,16 @@ import NoComments from "$lib/components/NoComments.svelte";
   <NoComments />
 {:else}
   <div class="topics-container">
-    <Comment />
+
+    <div class="topic">
+      <Comment />
+      <div class="topic-replies">
+        <Comment />
+        <Comment />
+      </div>
+      <Reply />
+    </div>
+
   </div>
 {/if}
 
@@ -19,5 +29,20 @@ import NoComments from "$lib/components/NoComments.svelte";
     margin: 24px 12px;
     background-color: #fff;
     border-radius: 8px;
+    background-color: #F5F6FA;
+  }
+
+  .topic {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .topic-replies {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 24px;
+    border-left: 2px solid #E9EBF0
   }
 </style>
