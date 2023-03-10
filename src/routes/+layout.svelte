@@ -15,6 +15,6 @@
   @import url('$lib/styles/global.css');
 
   main {
-    height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px);
   }
 </style>
