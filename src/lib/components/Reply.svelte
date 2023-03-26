@@ -1,16 +1,17 @@
 <script lang="ts">
     import Avatar from "./Avatar.svelte";
+    export let value = '';
 
 </script>
 
 <div class="reply-container">
 
   <label for="reply-textarea">
-    <textarea placeholder="Add a comment..." id="reply-textarea"></textarea>
+    <textarea bind:value placeholder="Add a comment..." id="reply-textarea"></textarea>
   </label>
   <div class="mobile-reply">
     <Avatar />
-    <button>SEND</button>
+    <button on:click>SEND</button>
   </div>
 
 </div>

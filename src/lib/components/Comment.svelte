@@ -2,6 +2,7 @@
   import Avatar from "./Avatar.svelte";
   import Voter from "./Voter.svelte";
 
+  export let text = '';
 </script>
 
 <div class="comment-container">
@@ -21,11 +22,11 @@
       <button class="reply-btn desktop-reply">Reply</button>
     </div>
     <div class="comment-body">
-      <p>Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You’ve nailed the design and the responsiveness at various breakpoints works really well.</p>
+      <p>{text}</p>
     </div>
     <div class="comment-footer">
       <Voter voteCount="{5}" />
-      <button class="reply-btn">Reply</button>
+      <button on:click class="reply-btn">Reply</button>
     </div>
   </div>
   
