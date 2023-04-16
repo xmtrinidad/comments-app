@@ -2,85 +2,67 @@
   import Comment from "$lib/components/Comment.svelte";
   import NoComments from "$lib/components/NoComments.svelte";
   import Reply from "$lib/components/Reply.svelte";
+  import { meme, topics } from "$lib/stores/mainStore";
+  import type { NewReply } from "$lib/types";
   let reply = '';
-  let topics = [
-    {
-      id: Math.random(),
-      user: 'Meme',
-      createDate: '03/09/2023',
-      text: 'Impressive! Though it seems the drag feature could be improved.',
-      votes: 0,
-      replies: [
-        {
-          id: Math.random(),
-          user: 'Meme 2',
-          createDate: '03/09/2023',
-          text: 'But overall it looks incredible. You\'ve nailed the design and the responsiveness at various breakpoints works really well.',
-          votes: 2,
-          replies: []
-        }
-      ],
-      isReply: false
-    },
-    {
-      id: Math.random(),
-      user: 'Meme',
-      createDate: '03/09/2023',
-      text: 'Impressive! Though it seems the drag feature could be improved.',
-      votes: 0,
-      replies: [],
-      isReply: false
-    }
-  ];
 
-  const hasReplies = false;
 
-  function submitReply() {
+  function submitReply(reply: NewReply) {
+    console.log(reply);
     const newReply = {
       id: Math.random(),
       user: 'Meme',
       createDate: '03/09/2023',
-      text: reply,
+      text: reply.commentReply,
+      commentReply: '',
       votes: 0,
       replies: [],
       isReply: false
     }
 
-    topics[0].replies.push(newReply);
+    reply.replies.push(newReply);
 
-    topics = topics;
+    topics.update((topics) => {
+      return topics;
+    });
 
-    reply = '';
+    // topics = topics;
   }
 
-  function onReplyClick() {
-    topics[0].isReply = true;
-    topics = topics;
+  function onReplyClick(topic) {
+    console.log(topic);
+    topic.isReply = !topic.isReply;
+    topics.update((topics) => {
+      return topics;
+    });
   }
 </script>
 
 
 
-{#if topics.length === 0}
+{#if $topics.length === 0}
   <NoComments />
 {:else}
   <div class="topics-container">
 
-    {#each topics as topic (topic.id)}
+    {#each $topics as topic (topic.id)}
       <div class="topic">
-        <Comment on:click={onReplyClick} text={topic.text} />
+        <Comment on:click={() => onReplyClick(topic)} text={topic.text} />
         <div class="topic-replies">
           {#each topic.replies as topicReply (topicReply.id)}
-          <Comment text={topicReply.text} />
+          <Comment on:click={() => onReplyClick(topicReply) } text={topicReply.text} />
+          {#if topicReply.isReply}
+            <Reply bind:value={topicReply.commentReply} on:click={() => submitReply(topicReply)} />
+          {/if}
           {/each}
         </div>
         {#if topic.isReply}
-          <Reply bind:value={reply} on:click={submitReply} />
+          <Reply bind:value={topic.commentReply} on:click={() => submitReply(topic)} />
         {/if}
       </div>
 
     {/each}
-
+    {$meme}
   </div>
 {/if}
 
